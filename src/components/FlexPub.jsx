@@ -465,11 +465,22 @@ const ResearchMatchPlatform = () => {
                 action="https://docs.google.com/forms/d/e/1FAIpQLSeTautinqrGvbxxB1c-3GBgZKqg5wx4D_tW4UkqncDyNFuPeQ/formResponse"
                 method="POST"
                 target="hidden_iframe"
-                onSubmit={() => {
+                onSubmit={(e) => {
+                  console.log('🔵 Form onSubmit triggered!');
+                  console.log('Form data:', {
+                    name: e.target.elements['entry.395811379'].value,
+                    email: e.target.elements['entry.1490892013'].value
+                  });
+                  
+                  // Show success message after a delay
                   setTimeout(() => {
+                    console.log('✅ Showing success alert');
                     alert('Thanks for joining! We\'ll be in touch soon.');
                     setShowWaitlistModal(false);
-                  }, 500);
+                  }, 1000);
+                  
+                  // Don't prevent default - let it submit to Google
+                  return true;
                 }}
                 className="space-y-5"
               >
@@ -480,6 +491,7 @@ const ResearchMatchPlatform = () => {
                     name="entry.395811379"
                     required
                     placeholder="Enter your full name"
+                    onChange={(e) => console.log('Name input:', e.target.value)}
                     className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
                   />
                 </div>
@@ -491,6 +503,7 @@ const ResearchMatchPlatform = () => {
                     name="entry.1490892013"
                     required
                     placeholder="you@university.edu"
+                    onChange={(e) => console.log('Email input:', e.target.value)}
                     className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
                   />
                   <p className="text-xs text-gray-500 mt-2.5 flex items-center gap-1.5 px-1">
@@ -501,6 +514,7 @@ const ResearchMatchPlatform = () => {
 
                 <button
                   type="submit"
+                  onClick={() => console.log('🟢 Button clicked!')}
                   className="w-full text-white px-6 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:opacity-90 text-lg mt-8"
                   style={{backgroundColor: '#f6ae2d'}}
                 >
@@ -513,7 +527,11 @@ const ResearchMatchPlatform = () => {
               </form>
               
               {/* Hidden iframe for form submission */}
-              <iframe name="hidden_iframe" style={{display: 'none'}}></iframe>
+              <iframe 
+                name="hidden_iframe" 
+                style={{display: 'none'}}
+                onLoad={() => console.log('🟣 Iframe loaded - form submitted to Google!')}
+              ></iframe>
             </div>
           </div>
         </div>
