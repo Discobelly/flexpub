@@ -255,6 +255,79 @@ const ResearchMatchPlatform = () => {
           </div>
         </div>
 
+        {/* Bulletin Board Demo Section */}
+        <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-5 h-5" style={{color: '#456b7a'}} />
+              <h2 className="text-lg font-semibold text-gray-900">Research Bulletin Board</h2>
+            </div>
+            <button className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity" style={{backgroundColor: '#f6ae2d'}}>
+              + Post Request
+            </button>
+          </div>
+          
+          <p className="text-sm text-gray-600 mb-4">
+            Post what you're looking for: statistics guru, database expert, manuscript editor, etc.
+          </p>
+
+          <div className="space-y-3">
+            {/* Demo Post 1 */}
+            <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+                    JK
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Looking for biostatistics expert</p>
+                    <p className="text-xs text-gray-500">MS4 • Cardiology • 2h ago</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 ml-13">
+                Need help with power analysis and regression modeling for heart failure outcomes study. Have IRB approval and data ready.
+              </p>
+            </div>
+
+            {/* Demo Post 2 */}
+            <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+                    SC
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Manuscript editor needed - oncology research</p>
+                    <p className="text-xs text-gray-500">Resident • Oncology • 5h ago</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 ml-13">
+                First draft complete for immunotherapy outcomes paper. Looking for someone to help refine for journal submission.
+              </p>
+            </div>
+
+            {/* Demo Post 3 */}
+            <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+                    EP
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Database design help for longitudinal study</p>
+                    <p className="text-xs text-gray-500">Undergraduate • Neuroscience • 1d ago</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 ml-13">
+                Starting a project tracking Alzheimer's biomarkers. Need guidance on REDCap setup and data structure.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredProfiles.slice(0, 8).map(profile => {
