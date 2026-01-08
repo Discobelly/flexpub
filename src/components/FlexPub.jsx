@@ -312,7 +312,7 @@ const ResearchMatchPlatform = () => {
 
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredProfiles.slice(0, 2).map(profile => {
+          {filteredProfiles.slice(0, 3).map(profile => {
             const matched = isMatched(profile.id);
             return (
               <div key={profile.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
@@ -463,23 +463,61 @@ const ResearchMatchPlatform = () => {
               </p>
             </div>
 
-            {/* Form section - Embedded Google Form */}
+            {/* Form section - Custom styled form */}
             <div className="px-10 py-10 bg-white">
-              <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLSeTautinqrGvbxxB1c-3GBgZKqg5wx4D_tW4UkqncDyNFuPeQ/viewform?embedded=true"
-                width="100%" 
-                height="520"
-                frameBorder="0" 
-                marginHeight="0" 
-                marginWidth="0"
-                className="rounded-lg"
+              <form 
+                action="https://docs.google.com/forms/d/e/1FAIpQLSeTautinqrGvbxxB1c-3GBgZKqg5wx4D_tW4UkqncDyNFuPeQ/formResponse"
+                method="POST"
+                target="hidden_iframe"
+                onSubmit={() => {
+                  setTimeout(() => {
+                    alert('Thanks for joining! We\'ll be in touch soon.');
+                    setShowWaitlistModal(false);
+                  }, 500);
+                }}
+                className="space-y-5"
               >
-                Loading…
-              </iframe>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <input
+                    type="text"
+                    name="entry.395811379"
+                    required
+                    placeholder="Enter your full name"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Academic Email</label>
+                  <input
+                    type="email"
+                    name="entry.1490892013"
+                    required
+                    placeholder="you@university.edu"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
+                  />
+                  <p className="text-xs text-gray-500 mt-2.5 flex items-center gap-1.5 px-1">
+                    <CheckCircle className="w-3.5 h-3.5 text-yellow-500" />
+                    Academic profile will be verified
+                  </p>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full text-white px-6 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:opacity-90 text-lg mt-8"
+                  style={{backgroundColor: '#f6ae2d'}}
+                >
+                  Get Early Access →
+                </button>
+                
+                <p className="text-xs text-gray-400 text-center mt-5">
+                  Join 500+ researchers on the waitlist
+                </p>
+              </form>
               
-              <p className="text-xs text-gray-400 text-center mt-5">
-                Join 500+ researchers on the waitlist
-              </p>
+              {/* Hidden iframe for form submission */}
+              <iframe name="hidden_iframe" style={{display: 'none'}}></iframe>
             </div>
           </div>
         </div>
