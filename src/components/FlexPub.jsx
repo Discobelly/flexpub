@@ -330,7 +330,7 @@ const ResearchMatchPlatform = () => {
 
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredProfiles.slice(0, 8).map(profile => {
+          {filteredProfiles.slice(0, 6).map(profile => {
             const matched = isMatched(profile.id);
             return (
               <div key={profile.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
@@ -433,8 +433,7 @@ const ResearchMatchPlatform = () => {
                     >
                       {isPremium || canSendFreeMatch() ? (
                         <>
-                          <Heart className="w-4 h-4" />
-                          Match {!isPremium && `(${FREE_MATCHES_PER_MONTH - freeMatchesUsed} free)`}
+                          Match
                         </>
                       ) : (
                         <>
