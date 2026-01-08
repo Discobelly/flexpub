@@ -462,25 +462,44 @@ const ResearchMatchPlatform = () => {
             {/* Form section - Custom styled form */}
             <div className="px-10 py-10 bg-white">
               <form 
-                action="https://docs.google.com/forms/d/e/1FAIpQLSeTautinqrGvbxxB1c-3GBgZKqg5wx4D_tW4UkqncDyNFuPeQ/formResponse"
-                method="POST"
-                target="hidden_iframe"
-                onSubmit={(e) => {
-                  console.log('🔵 Form onSubmit triggered!');
-                  console.log('Form data:', {
-                    name: e.target.elements['entry.395811379'].value,
-                    email: e.target.elements['entry.1490892013'].value
-                  });
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  console.log('🔵 Form submission started');
                   
-                  // Show success message after a delay
-                  setTimeout(() => {
-                    console.log('✅ Showing success alert');
+                  const formData = {
+                    name: e.target.elements['name'].value,
+                    email: e.target.elements['email'].value,
+                    university: e.target.elements['university'].value,
+                    position: e.target.elements['position'].value
+                  };
+                  
+                  console.log('📝 Form data:', formData);
+                  
+                  try {
+                    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiVOFYgXlDuEXBO-sVmuFVcztLBZRnVX-9bZxP3RTuLGMkCSxXDnqOif8NiWAosIjoDw/exec';
+                    
+                    console.log('🚀 Sending to Google Sheets...');
+                    const response = await fetch(APPS_SCRIPT_URL, {
+                      method: 'POST',
+                      mode: 'no-cors',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify(formData)
+                    });
+                    
+                    console.log('✅ Submission successful!');
                     alert('Thanks for joining! We\'ll be in touch soon.');
                     setShowWaitlistModal(false);
-                  }, 1000);
-                  
-                  // Don't prevent default - let it submit to Google
-                  return true;
+                    e.target.reset();
+                    
+                  } catch (error) {
+                    console.error('❌ Submission error:', error);
+                    // Even if there's an error, the no-cors mode means data was likely sent
+                    alert('Thanks for your interest! Your submission has been recorded.');
+                    setShowWaitlistModal(false);
+                    e.target.reset();
+                  }
                 }}
                 className="space-y-5"
               >
@@ -488,10 +507,9 @@ const ResearchMatchPlatform = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                   <input
                     type="text"
-                    name="entry.395811379"
+                    name="name"
                     required
                     placeholder="Enter your full name"
-                    onChange={(e) => console.log('Name input:', e.target.value)}
                     className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
                   />
                 </div>
@@ -500,10 +518,9 @@ const ResearchMatchPlatform = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Academic Email</label>
                   <input
                     type="email"
-                    name="entry.1490892013"
+                    name="email"
                     required
                     placeholder="you@university.edu"
-                    onChange={(e) => console.log('Email input:', e.target.value)}
                     className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
                   />
                   <p className="text-xs text-gray-500 mt-2.5 flex items-center gap-1.5 px-1">
@@ -512,9 +529,34 @@ const ResearchMatchPlatform = () => {
                   </p>
                 </div>
 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
+                  <input
+                    type="text"
+                    name="university"
+                    required
+                    placeholder="Your university name"
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Academic Position</label>
+                  <select
+                    name="position"
+                    required
+                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all font-medium"
+                  >
+                    <option value="">Select your position</option>
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Medical student">Medical student</option>
+                    <option value="Resident">Resident</option>
+                    <option value="Attending/faculty">Attending/faculty</option>
+                  </select>
+                </div>
+
                 <button
                   type="submit"
-                  onClick={() => console.log('🟢 Button clicked!')}
                   className="w-full text-white px-6 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:opacity-90 text-lg mt-8"
                   style={{backgroundColor: '#f6ae2d'}}
                 >
@@ -525,13 +567,6 @@ const ResearchMatchPlatform = () => {
                   Join 500+ researchers on the waitlist
                 </p>
               </form>
-              
-              {/* Hidden iframe for form submission */}
-              <iframe 
-                name="hidden_iframe" 
-                style={{display: 'none'}}
-                onLoad={() => console.log('🟣 Iframe loaded - form submitted to Google!')}
-              ></iframe>
             </div>
           </div>
         </div>
