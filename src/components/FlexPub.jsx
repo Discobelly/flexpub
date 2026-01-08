@@ -307,30 +307,12 @@ const ResearchMatchPlatform = () => {
                 First draft complete for immunotherapy outcomes paper. Looking for someone to help refine for journal submission.
               </p>
             </div>
-
-            {/* Demo Post 3 */}
-            <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
-                    EP
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Database design help for longitudinal study</p>
-                    <p className="text-xs text-gray-500">Undergraduate • Neuroscience • 1d ago</p>
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-gray-700 ml-13">
-                Starting a project tracking Alzheimer's biomarkers. Need guidance on REDCap setup and data structure.
-              </p>
-            </div>
           </div>
         </div>
 
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredProfiles.slice(0, 4).map(profile => {
+          {filteredProfiles.slice(0, 2).map(profile => {
             const matched = isMatched(profile.id);
             return (
               <div key={profile.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
