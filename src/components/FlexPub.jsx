@@ -26,8 +26,8 @@ const ResearchMatchPlatform = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
       
-      // When user scrolls 80% down the page, show modal
-      if (scrollPosition > pageHeight * 0.8) {
+      // When user scrolls 60% down the page, show modal (mid-scroll through profiles)
+      if (scrollPosition > pageHeight * 0.6) {
         setShowWaitlistModal(true);
         setHasSeenModal(true);
       }
@@ -267,10 +267,6 @@ const ResearchMatchPlatform = () => {
             </button>
           </div>
           
-          <p className="text-sm text-gray-600 mb-4">
-            Post what you're looking for: statistics guru, database expert, manuscript editor, etc.
-          </p>
-
           <div className="space-y-3">
             {/* Demo Post 1 */}
             <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
@@ -312,7 +308,7 @@ const ResearchMatchPlatform = () => {
 
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredProfiles.slice(0, 3).map(profile => {
+          {filteredProfiles.slice(0, 4).map(profile => {
             const matched = isMatched(profile.id);
             return (
               <div key={profile.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
