@@ -892,6 +892,25 @@ const ResearchMatchPlatform = () => {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <div className="bg-gray-50 border-t border-gray-200 py-8 mt-12">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-sm text-gray-600">
+            Questions? Email us at{' '}
+            <a 
+              href="mailto:hello.flexpub@gmail.com" 
+              className="font-medium hover:underline"
+              style={{color: '#456b7a'}}
+            >
+              hello.flexpub@gmail.com
+            </a>
+          </p>
+          <p className="text-xs text-gray-400 mt-2">
+            © 2026 FlexPub. Built for researchers, by researchers.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
