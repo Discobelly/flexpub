@@ -18,16 +18,15 @@ const ResearchMatchPlatform = () => {
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   const [hasSeenModal, setHasSeenModal] = useState(false);
 
-  // Trigger modal when user scrolls near bottom
+  // Trigger modal when user scrolls, regardless of filtered results
   useEffect(() => {
     const handleScroll = () => {
       if (hasSeenModal) return;
       
-      const scrollPosition = window.scrollY + window.innerHeight;
-      const pageHeight = document.documentElement.scrollHeight;
+      const scrollPosition = window.scrollY;
       
-      // When user scrolls 60% down the page, show modal (mid-scroll through profiles)
-      if (scrollPosition > pageHeight * 0.6) {
+      // Show modal after user has scrolled down 800px (past the header and some content)
+      if (scrollPosition > 800) {
         setShowWaitlistModal(true);
         setHasSeenModal(true);
       }
@@ -438,29 +437,40 @@ const ResearchMatchPlatform = () => {
 
       {/* Sleek Modern Waitlist Modal with Working Blur */}
       {showWaitlistModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden">
-          {/* Blur overlay - darker, no click to close */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Blur overlay with close on click */}
           <div 
             className="absolute inset-0 bg-black/60"
             style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
+            onClick={() => setShowWaitlistModal(false)}
           ></div>
           
-          {/* Modal - centered and compact, NO X BUTTON */}
-          <div className="relative bg-white rounded-3xl w-full max-w-lg shadow-2xl z-10 overflow-hidden">
+          {/* Modal - centered and compact with max-height for small screens */}
+          <div className="relative bg-white rounded-2xl w-full max-w-md shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
             
-            {/* Modal header section - Dusky Blue #456b7a */}
-            <div className="px-10 pt-16 pb-10 text-center" style={{backgroundColor: '#456b7a'}}>
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl" style={{backgroundColor: '#f6ae2d'}}>
-                <BookOpen className="w-10 h-10 text-white" />
+            {/* Modal header section - Dusky Blue #456b7a - more compact */}
+            <div className="px-8 pt-8 pb-6 relative" style={{backgroundColor: '#456b7a'}}>
+              <button
+                onClick={() => setShowWaitlistModal(false)}
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style={{backgroundColor: '#f6ae2d'}}>
+                  <BookOpen className="w-6 h-6 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">Join FlexPub</h2>
               </div>
-              <h2 className="text-4xl font-bold text-white mb-3">Join FlexPub</h2>
-              <p className="text-white/90 text-lg">
+              <p className="text-white/90 text-sm">
                 Connect with future collaborators and mentors for free. Get productive. Privacy ensured.
               </p>
             </div>
 
-            {/* Form section - Custom styled form */}
-            <div className="px-10 py-10 bg-white">
+            {/* Form section - More compact spacing */}
+            <div className="px-8 py-6 bg-white">
               <form 
                 onSubmit={async (e) => {
                   e.preventDefault();
@@ -489,66 +499,140 @@ const ResearchMatchPlatform = () => {
                     });
                     
                     console.log('✅ Submission successful!');
-                    alert('Thanks for joining! We\'ll be in touch soon.');
+                    
+                    // Close modal
                     setShowWaitlistModal(false);
                     e.target.reset();
                     
+                    // Show modern toast notification
+                    const toast = document.createElement('div');
+                    toast.innerHTML = `
+                      <div style="position: fixed; top: 24px; right: 24px; background: white; border-left: 4px solid #f6ae2d; padding: 16px 20px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); z-index: 9999; max-width: 380px; animation: slideIn 0.3s ease-out;">
+                        <div style="display: flex; align-items: start; gap: 12px;">
+                          <div style="background: #f6ae2d; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          </div>
+                          <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #111827; margin-bottom: 4px; font-size: 15px;">You're on the list!</div>
+                            <div style="font-size: 14px; color: #6b7280; line-height: 1.4;">We'll be in touch soon with early access.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <style>
+                        @keyframes slideIn {
+                          from {
+                            transform: translateX(400px);
+                            opacity: 0;
+                          }
+                          to {
+                            transform: translateX(0);
+                            opacity: 1;
+                          }
+                        }
+                      </style>
+                    `;
+                    document.body.appendChild(toast);
+                    setTimeout(() => {
+                      toast.style.transition = 'all 0.3s ease-out';
+                      toast.style.transform = 'translateX(400px)';
+                      toast.style.opacity = '0';
+                      setTimeout(() => toast.remove(), 300);
+                    }, 4500);
+                    
                   } catch (error) {
                     console.error('❌ Submission error:', error);
-                    // Even if there's an error, the no-cors mode means data was likely sent
-                    alert('Thanks for your interest! Your submission has been recorded.');
                     setShowWaitlistModal(false);
                     e.target.reset();
+                    
+                    // Show toast even on error (data likely still sent due to no-cors)
+                    const toast = document.createElement('div');
+                    toast.innerHTML = `
+                      <div style="position: fixed; top: 24px; right: 24px; background: white; border-left: 4px solid #f6ae2d; padding: 16px 20px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); z-index: 9999; max-width: 380px; animation: slideIn 0.3s ease-out;">
+                        <div style="display: flex; align-items: start; gap: 12px;">
+                          <div style="background: #f6ae2d; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          </div>
+                          <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #111827; margin-bottom: 4px; font-size: 15px;">You're on the list!</div>
+                            <div style="font-size: 14px; color: #6b7280; line-height: 1.4;">We'll be in touch soon with early access.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <style>
+                        @keyframes slideIn {
+                          from {
+                            transform: translateX(400px);
+                            opacity: 0;
+                          }
+                          to {
+                            transform: translateX(0);
+                            opacity: 1;
+                          }
+                        }
+                      </style>
+                    `;
+                    document.body.appendChild(toast);
+                    setTimeout(() => {
+                      toast.style.transition = 'all 0.3s ease-out';
+                      toast.style.transform = 'translateX(400px)';
+                      toast.style.opacity = '0';
+                      setTimeout(() => toast.remove(), 300);
+                    }, 4500);
                   }
                 }}
-                className="space-y-5"
+                className="space-y-4"
               >
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
                   <input
                     type="text"
                     name="name"
                     required
                     placeholder="Enter your full name"
-                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Academic Email</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Academic Email</label>
                   <input
                     type="email"
                     name="email"
                     required
                     placeholder="you@university.edu"
-                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400"
                   />
-                  <p className="text-xs text-gray-500 mt-2.5 flex items-center gap-1.5 px-1">
+                  <p className="text-xs text-gray-500 mt-1.5 flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-yellow-500" />
                     Academic profile will be verified
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">University</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">University</label>
                   <input
                     type="text"
                     name="university"
                     required
                     placeholder="Your university name"
-                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all placeholder:text-gray-400"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Academic Position</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Academic Position</label>
                   <select
                     name="position"
                     required
-                    className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all font-medium"
+                    className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
                   >
                     <option value="">Select your position</option>
                     <option value="Undergraduate">Undergraduate</option>
+                    <option value="Graduate student">Graduate student</option>
                     <option value="Medical student">Medical student</option>
                     <option value="Resident">Resident</option>
                     <option value="Attending/faculty">Attending/faculty</option>
@@ -557,13 +641,13 @@ const ResearchMatchPlatform = () => {
 
                 <button
                   type="submit"
-                  className="w-full text-white px-6 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:opacity-90 text-lg mt-8"
+                  className="w-full text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:opacity-90 text-base mt-4"
                   style={{backgroundColor: '#f6ae2d'}}
                 >
                   Get Early Access →
                 </button>
                 
-                <p className="text-xs text-gray-400 text-center mt-5">
+                <p className="text-xs text-gray-400 text-center mt-3">
                   Join 500+ researchers on the waitlist
                 </p>
               </form>
