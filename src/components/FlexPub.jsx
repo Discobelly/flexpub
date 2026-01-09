@@ -829,7 +829,7 @@ const ResearchMatchPlatform = () => {
             <div>
               <h3 className="font-semibold text-blue-900 mb-2">Privacy First</h3>
               <p className="text-sm text-blue-800">
-                Your privacy matters. Until you match, profiles show only first name or initials, institution tier (not specific school), and region. Full details unlock only after mutual matching.
+                You control how much you share. Show your full name or just initials. Share your specific university or just the tier (Top 10, Top 50, etc.). Full contact details are only revealed after you both match.
               </p>
             </div>
           </div>
