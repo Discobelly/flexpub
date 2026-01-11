@@ -265,9 +265,28 @@ const ResearchMatchPlatform = () => {
               + Post Request
             </button>
           </div>
+
+          {/* Filter Pills - Show transparency features */}
+          <div className="flex flex-wrap gap-2 mb-4 pb-4 border-b border-gray-200">
+            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors">
+              All Projects
+            </button>
+            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
+              <span>💰</span> Paid Only
+            </button>
+            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
+              <span>✍️</span> Authorship
+            </button>
+            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
+              <span>🔬</span> Specialty
+            </button>
+            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
+              <span>⏱️</span> Timeframe
+            </button>
+          </div>
           
           <div className="space-y-3">
-            {/* Demo Post 1 */}
+            {/* Demo Post 1 - With transparent badges */}
             <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-3">
@@ -280,12 +299,29 @@ const ResearchMatchPlatform = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Transparent badges */}
+              <div className="flex flex-wrap gap-2 mb-3 ml-13">
+                <span className="px-2 py-1 bg-green-50 border border-green-200 text-green-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>💰</span> $30/hr
+                </span>
+                <span className="px-2 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>✍️</span> Middle author
+                </span>
+                <span className="px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>🔬</span> Cardiology
+                </span>
+                <span className="px-2 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>⏱️</span> 10 hrs/wk, 3 mo
+                </span>
+              </div>
+
               <p className="text-sm text-gray-700 ml-13">
-                Need help with power analysis and regression modeling for heart failure outcomes study. Have IRB approval and data ready.
+                Need help with power analysis and regression modeling for heart failure outcomes study. R programming required.
               </p>
             </div>
 
-            {/* Demo Post 2 */}
+            {/* Demo Post 2 - Different compensation model */}
             <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-3">
@@ -293,15 +329,39 @@ const ResearchMatchPlatform = () => {
                     SC
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Manuscript editor needed - oncology research</p>
+                    <p className="font-semibold text-gray-900">Systematic review - need literature screener</p>
                     <p className="text-xs text-gray-500">Resident • Oncology • 5h ago</p>
                   </div>
                 </div>
               </div>
+
+              {/* Transparent badges */}
+              <div className="flex flex-wrap gap-2 mb-3 ml-13">
+                <span className="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>🎓</span> Unpaid
+                </span>
+                <span className="px-2 py-1 bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>⭐</span> First author
+                </span>
+                <span className="px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>🔬</span> Oncology
+                </span>
+                <span className="px-2 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-md flex items-center gap-1">
+                  <span>⏱️</span> 5-8 hrs/wk, 4 mo
+                </span>
+              </div>
+
               <p className="text-sm text-gray-700 ml-13">
-                First draft complete for immunotherapy outcomes paper. Looking for someone to help refine for journal submission.
+                Great opportunity for first publication. Training provided on systematic review methodology. No prior experience needed.
               </p>
             </div>
+          </div>
+
+          {/* Info note about transparency */}
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <p className="text-xs text-gray-600 text-center">
+              Every project shows <span className="font-semibold" style={{color: '#456b7a'}}>payment, authorship, specialty & timeframe</span> upfront. No surprises.
+            </p>
           </div>
         </div>
 
