@@ -105,7 +105,7 @@ const ResearchMatchPlatform = () => {
   
   const levels = ["Undergraduate", "Medical Student", "Resident", "Attending/Faculty"];
 
-  const FREE_MATCHES_PER_MONTH = 3;
+  const FREE_MATCHES_PER_MONTH = 10;
 
   const canSendFreeMatch = () => {
     return freeMatchesUsed < FREE_MATCHES_PER_MONTH;
@@ -163,22 +163,14 @@ const ResearchMatchPlatform = () => {
               </div>
             </div>
             <div className="flex items-center gap-6">
-              {!isPremium && (
-                <div className="text-right">
-                  <p className="text-sm text-white/80">Free Matches</p>
-                  <p className="text-2xl font-bold" style={{color: '#f6ae2d'}}>
-                    {FREE_MATCHES_PER_MONTH - freeMatchesUsed}
-                    <span className="text-sm text-white/60 ml-1">remaining</span>
-                  </p>
-                  <p className="text-xs text-white/60">Resets monthly</p>
-                </div>
-              )}
-              {isPremium && (
-                <div className="px-4 py-2 text-white rounded-lg font-medium flex items-center gap-2 shadow-lg" style={{backgroundColor: '#f6ae2d'}}>
-                  <Zap className="w-4 h-4 text-white" />
-                  Premium Member
-                </div>
-              )}
+              <div className="text-right">
+                <p className="text-sm text-white/80">Match Requests</p>
+                <p className="text-2xl font-bold" style={{color: '#f6ae2d'}}>
+                  {FREE_MATCHES_PER_MONTH - freeMatchesUsed}
+                  <span className="text-sm text-white/60 ml-1">remaining</span>
+                </p>
+                <p className="text-xs text-white/60">Resets monthly</p>
+              </div>
             </div>
           </div>
         </div>
@@ -873,8 +865,9 @@ const ResearchMatchPlatform = () => {
             <div>
               <h3 className="font-semibold text-yellow-900 mb-2">Built for Researchers, By Researchers</h3>
               <p className="text-sm text-yellow-800">
-                We know research collaboration shouldn't break the bank. That's why <strong>matching is free</strong> for everyone. 
-                Our mission is to help the next generation of clinicians and scientists build meaningful research partnerships.
+                We know finding research opportunities is hard – often unpaid, rarely offering authorship, and unclear from the start. 
+                FlexPub changes this. Every opportunity shows <strong>payment, authorship, time commitment, and required skills upfront</strong>. 
+                No surprises. No wasted time. Just transparent collaboration.
               </p>
             </div>
           </div>
@@ -906,47 +899,22 @@ const ResearchMatchPlatform = () => {
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">1</div>
-                  <p><strong>Browse profiles</strong> and filter by specialty, institution tier, publication history, and more</p>
+                  <p><strong>Browse transparent opportunities</strong> – see payment, authorship, time commitment, and skills needed upfront</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">2</div>
-                  <p><strong>Send a match request</strong> – you get <strong>3 free matches per month</strong>, no credit card required</p>
+                  <p><strong>Send match requests</strong> – you get <strong>10 free match requests per month</strong> to connect with the right collaborators</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">3</div>
-                  <p><strong>Connect!</strong> When both parties accept, full contact info is revealed and you can start collaborating</p>
+                  <p><strong>Connect and collaborate</strong> – when both parties accept, full contact details are revealed and you can start working together</p>
                 </div>
               </div>
               
               <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <p className="text-xs text-gray-600 mb-3">
-                  <strong>Need more matches?</strong> Additional matches after your 3 free ones are just $5 each. Or upgrade to Premium for unlimited matching plus other conveniences.
+                <p className="text-sm text-gray-700">
+                  <strong>Simple pricing:</strong> Free to browse and match. Researchers can pay to feature their project listings for more visibility.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="p-3 bg-white rounded border border-gray-200">
-                    <p className="font-semibold text-gray-900 text-sm mb-2">Free (Always)</p>
-                    <ul className="text-xs text-gray-700 space-y-1">
-                      <li>✓ 3 matches/month</li>
-                      <li>✓ Browse all profiles</li>
-                      <li>✓ Basic filters</li>
-                      <li>✓ Full messaging</li>
-                      <li>• Extra matches: $5 each</li>
-                    </ul>
-                  </div>
-                  <div className="p-3 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded border-2 border-yellow-300">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Zap className="w-4 h-4 text-blue-600" />
-                      <p className="font-semibold text-gray-900 text-sm">Premium - $19/month</p>
-                    </div>
-                    <ul className="text-xs text-gray-700 space-y-1">
-                      <li>✓ <strong>Unlimited matches</strong></li>
-                      <li>✓ Advanced search filters</li>
-                      <li>✓ See who viewed you</li>
-                      <li>✓ Priority support</li>
-                      <li>✓ Featured profile</li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
