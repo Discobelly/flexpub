@@ -125,20 +125,8 @@ const ResearchMatchPlatform = () => {
   };
 
   const handleMatch = (profile) => {
-    if (!matchedProfiles.find(p => p.id === profile.id)) {
-      setMatchedProfiles([...matchedProfiles, profile]);
-      
-      if (isPremium || canSendFreeMatch()) {
-        if (!isPremium) {
-          setFreeMatchesUsed(freeMatchesUsed + 1);
-        }
-        alert(`Match request sent to ${profile.displayName}! They'll be notified and can accept or decline. ${!isPremium && freeMatchesUsed + 1 < FREE_MATCHES_PER_MONTH ? `You have ${FREE_MATCHES_PER_MONTH - freeMatchesUsed - 1} free matches remaining this month.` : ''}`);
-      } else {
-        alert(`Match request sent to ${profile.displayName}! This match costs $5 since you've used your 3 free matches this month. Payment will be processed upon mutual match.`);
-      }
-    } else {
-      alert(`You've already matched with ${profile.displayName}!`);
-    }
+    // Show waitlist modal for demo - all match requests go to waitlist
+    setShowWaitlistModal(true);
   };
 
   const isMatched = (profileId) => {
@@ -253,7 +241,11 @@ const ResearchMatchPlatform = () => {
               <BookOpen className="w-5 h-5" style={{color: '#456b7a'}} />
               <h2 className="text-lg font-semibold text-gray-900">Research Bulletin Board</h2>
             </div>
-            <button className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity" style={{backgroundColor: '#f6ae2d'}}>
+            <button 
+              onClick={() => setShowWaitlistModal(true)}
+              className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity" 
+              style={{backgroundColor: '#f6ae2d'}}
+            >
               + Post Request
             </button>
           </div>
@@ -830,21 +822,11 @@ const ResearchMatchPlatform = () => {
                     <button
                       onClick={() => {
                         handleMatch(selectedProfile);
-                        setSelectedProfile(null);
                       }}
                       className="flex-1 px-4 py-3 bg-blue-600 text-gray-900 font-bold hover:bg-blue-700 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
                     >
-                      {isPremium || canSendFreeMatch() ? (
-                        <>
-                          <Heart className="w-5 h-5" />
-                          Send Match Request
-                        </>
-                      ) : (
-                        <>
-                          <DollarSign className="w-5 h-5" />
-                          Send Match Request ($5)
-                        </>
-                      )}
+                      <Heart className="w-5 h-5" />
+                      Send Match Request
                     </button>
                   )}
                 </div>
