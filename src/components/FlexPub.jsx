@@ -105,7 +105,7 @@ const ResearchMatchPlatform = () => {
   
   const levels = ["Undergraduate", "Medical Student", "Resident", "Attending/Faculty"];
 
-  const FREE_MATCHES_PER_MONTH = 10;
+  const FREE_MATCHES_PER_MONTH = 5;
 
   const canSendFreeMatch = () => {
     return freeMatchesUsed < FREE_MATCHES_PER_MONTH;
@@ -885,7 +885,7 @@ const ResearchMatchPlatform = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">2</div>
-                  <p><strong>Send match requests</strong> – you get <strong>10 free match requests per month</strong> to connect with the right collaborators</p>
+                  <p><strong>Send match requests</strong> – you get <strong>5 free match requests per month</strong> to connect with the right collaborators</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">3</div>
