@@ -17,6 +17,12 @@ const ResearchMatchPlatform = () => {
   const [freeMatchesUsed, setFreeMatchesUsed] = useState(0);
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   const [hasSeenModal, setHasSeenModal] = useState(false);
+  const [bulletinFilters, setBulletinFilters] = useState({
+    type: 'all', // all, paid, authorship
+    specialty: '',
+    timeframe: '',
+    skillset: ''
+  });
 
   // Trigger modal when user scrolls, regardless of filtered results
   useEffect(() => {
@@ -139,7 +145,7 @@ const ResearchMatchPlatform = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Header */}
       <div className="shadow-sm border-b border-gray-200" style={{backgroundColor: '#456b7a'}}>
-        <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg shadow-lg" style={{backgroundColor: '#f6ae2d'}}>
@@ -169,7 +175,7 @@ const ResearchMatchPlatform = () => {
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-gray-200 rounded-xl p-6 mb-6">
           <div className="max-w-3xl mx-auto text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Get productive.
+              Connect. Collaborate. Publish.
             </h2>
             <p className="text-base text-gray-700">
               Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
@@ -183,7 +189,7 @@ const ResearchMatchPlatform = () => {
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{backgroundColor: '#456b7a'}}>
                   <Users className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Have a Project?</h3>
+                <h3 className="text-lg font-bold text-gray-900">Need Support to Complete Your Research Project?</h3>
               </div>
               <p className="text-sm text-gray-700 mb-3">
                 Finding collaborators with the right skills and availability is difficult and time-consuming.
@@ -235,76 +241,7 @@ const ResearchMatchPlatform = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Filter Bar */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-gray-600">
-              <Filter className="w-4 h-4" />
-              <span className="text-sm font-semibold">Filters:</span>
-            </div>
-
-            <select
-              value={filters.level}
-              onChange={(e) => setFilters({...filters, level: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">All Levels</option>
-              {levels.map(level => <option key={level} value={level}>{level}</option>)}
-            </select>
-
-            <select
-              value={filters.specialty}
-              onChange={(e) => setFilters({...filters, specialty: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">All Specialties</option>
-              {specialties.map(spec => <option key={spec} value={spec}>{spec}</option>)}
-            </select>
-
-            <select
-              value={filters.institutionTier}
-              onChange={(e) => setFilters({...filters, institutionTier: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">All Tiers</option>
-              {institutionTiers.map(tier => <option key={tier} value={tier}>{tier}</option>)}
-            </select>
-
-            <select
-              value={filters.region}
-              onChange={(e) => setFilters({...filters, region: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">All Regions</option>
-              {regions.map(region => <option key={region} value={region}>{region}</option>)}
-            </select>
-
-            <label className="flex items-center gap-2 cursor-pointer px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-              <input
-                type="checkbox"
-                checked={filters.hasPublications}
-                onChange={(e) => setFilters({...filters, hasPublications: e.target.checked})}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <span className="text-sm font-medium text-gray-700">Has Publications</span>
-            </label>
-
-            {(filters.level || filters.specialty || filters.institutionTier || filters.region || filters.hasPublications) && (
-              <button
-                onClick={() => setFilters({ level: '', specialty: '', hasPublications: false, institutionTier: '', region: '' })}
-                className="text-sm text-blue-600 hover:text-blue-800 font-medium px-3 py-2"
-              >
-                Clear All
-              </button>
-            )}
-
-            <div className="ml-auto text-sm text-gray-600">
-              {filteredProfiles.length} researchers
-            </div>
-          </div>
-        </div>
-
-        {/* Bulletin Board Demo Section */}
+        {/* Bulletin Board Demo Section - MOVED HERE */}
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
@@ -320,23 +257,76 @@ const ResearchMatchPlatform = () => {
             </button>
           </div>
 
-          {/* Filter Pills - Show transparency features */}
+          {/* Filter Pills - Clickable transparency filters */}
           <div className="flex flex-wrap gap-2 mb-4 pb-4 border-b border-gray-200">
-            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors">
+            <button 
+              onClick={() => setBulletinFilters({...bulletinFilters, type: 'all'})}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                bulletinFilters.type === 'all' 
+                  ? 'bg-gray-800 text-white' 
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+              }`}
+            >
               All Projects
             </button>
-            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
+            <button 
+              onClick={() => setBulletinFilters({...bulletinFilters, type: bulletinFilters.type === 'paid' ? 'all' : 'paid'})}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
+                bulletinFilters.type === 'paid' 
+                  ? 'bg-green-600 text-white' 
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+              }`}
+            >
               <span>💰</span> Paid Only
             </button>
-            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
+            <button 
+              onClick={() => setBulletinFilters({...bulletinFilters, type: bulletinFilters.type === 'authorship' ? 'all' : 'authorship'})}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
+                bulletinFilters.type === 'authorship' 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+              }`}
+            >
               <span>✍️</span> Authorship
             </button>
-            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
-              <span>🔬</span> Specialty
-            </button>
-            <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors flex items-center gap-1">
-              <span>⏱️</span> Timeframe
-            </button>
+            
+            <select
+              value={bulletinFilters.specialty}
+              onChange={(e) => setBulletinFilters({...bulletinFilters, specialty: e.target.value})}
+              className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors border-none cursor-pointer"
+            >
+              <option value="">🔬 All Specialties</option>
+              <option value="cardiology">Cardiology</option>
+              <option value="oncology">Oncology</option>
+              <option value="neurology">Neurology</option>
+              <option value="surgery">Surgery</option>
+              <option value="pediatrics">Pediatrics</option>
+            </select>
+            
+            <select
+              value={bulletinFilters.skillset}
+              onChange={(e) => setBulletinFilters({...bulletinFilters, skillset: e.target.value})}
+              className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors border-none cursor-pointer"
+            >
+              <option value="">🛠️ All Skills</option>
+              <option value="statistics">Statistics / Biostatistics</option>
+              <option value="writing">Medical Writing</option>
+              <option value="data">Data Collection</option>
+              <option value="literature">Literature Review</option>
+              <option value="coding">Programming (R, Python, etc.)</option>
+            </select>
+            
+            <select
+              value={bulletinFilters.timeframe}
+              onChange={(e) => setBulletinFilters({...bulletinFilters, timeframe: e.target.value})}
+              className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors border-none cursor-pointer"
+            >
+              <option value="">⏱️ Any Timeframe</option>
+              <option value="short">&lt;1 month</option>
+              <option value="medium">1-3 months</option>
+              <option value="long">3-6 months</option>
+              <option value="extended">6+ months</option>
+            </select>
           </div>
           
           <div className="space-y-3">
@@ -416,6 +406,75 @@ const ResearchMatchPlatform = () => {
             <p className="text-xs text-gray-600 text-center">
               Every project shows <span className="font-semibold" style={{color: '#456b7a'}}>payment, authorship, specialty & timeframe</span> upfront. No surprises.
             </p>
+          </div>
+        </div>
+
+        {/* Filter Bar */}
+        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2 text-gray-600">
+              <Filter className="w-4 h-4" />
+              <span className="text-sm font-semibold">Filters:</span>
+            </div>
+
+            <select
+              value={filters.level}
+              onChange={(e) => setFilters({...filters, level: e.target.value})}
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All Levels</option>
+              {levels.map(level => <option key={level} value={level}>{level}</option>)}
+            </select>
+
+            <select
+              value={filters.specialty}
+              onChange={(e) => setFilters({...filters, specialty: e.target.value})}
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All Specialties</option>
+              {specialties.map(spec => <option key={spec} value={spec}>{spec}</option>)}
+            </select>
+
+            <select
+              value={filters.institutionTier}
+              onChange={(e) => setFilters({...filters, institutionTier: e.target.value})}
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All Tiers</option>
+              {institutionTiers.map(tier => <option key={tier} value={tier}>{tier}</option>)}
+            </select>
+
+            <select
+              value={filters.region}
+              onChange={(e) => setFilters({...filters, region: e.target.value})}
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">All Regions</option>
+              {regions.map(region => <option key={region} value={region}>{region}</option>)}
+            </select>
+
+            <label className="flex items-center gap-2 cursor-pointer px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+              <input
+                type="checkbox"
+                checked={filters.hasPublications}
+                onChange={(e) => setFilters({...filters, hasPublications: e.target.checked})}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Has Publications</span>
+            </label>
+
+            {(filters.level || filters.specialty || filters.institutionTier || filters.region || filters.hasPublications) && (
+              <button
+                onClick={() => setFilters({ level: '', specialty: '', hasPublications: false, institutionTier: '', region: '' })}
+                className="text-sm text-blue-600 hover:text-blue-800 font-medium px-3 py-2"
+              >
+                Clear All
+              </button>
+            )}
+
+            <div className="ml-auto text-sm text-gray-600">
+              {filteredProfiles.length} researchers
+            </div>
           </div>
         </div>
 
