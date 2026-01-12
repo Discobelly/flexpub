@@ -23,6 +23,16 @@ const ResearchMatchPlatform = () => {
     timeframe: '',
     skillset: ''
   });
+  const [scrollY, setScrollY] = useState(0);
+
+  // Scroll listener for hero animations
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Trigger modal when user scrolls, regardless of filtered results
   useEffect(() => {
@@ -141,59 +151,105 @@ const ResearchMatchPlatform = () => {
 
   const filteredProfiles = getFilteredProfiles();
 
+  // Calculate opacity and transforms based on scroll
+  const heroOpacity = Math.max(0, 1 - scrollY / 400);
+  const heroScale = 1 + (scrollY / 2000);
+  const subtitleOpacity = Math.max(0, Math.min(1, (scrollY - 300) / 200));
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Header - Elegant minimal design */}
-      <div className="border-b border-gray-100" style={{background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 100%)'}}>
-        <div className="max-w-7xl mx-auto px-6 py-5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}>
-                <BookOpen className="w-5 h-5 text-white" />
+      {/* Landing Hero - Full viewport with Acropolis painting */}
+      <div className="relative h-screen overflow-hidden">
+        {/* Background painting with zoom effect */}
+        <div 
+          className="absolute inset-0 transition-transform duration-700 ease-out"
+          style={{
+            transform: `scale(${heroScale})`,
+            opacity: heroOpacity
+          }}
+        >
+          <img 
+            src="/acropolis.jpg" 
+            alt="Acropolis" 
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40"></div>
+        </div>
+
+        {/* Hero content - fades out on scroll */}
+        <div 
+          className="relative z-10 h-full flex flex-col"
+          style={{ opacity: heroOpacity }}
+        >
+          {/* Header elements over painting */}
+          <div className="px-6 py-5">
+            <div className="max-w-7xl mx-auto flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-sm" style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}>
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-light tracking-tight text-white drop-shadow-lg">FlexPub</h1>
+                  <p className="text-xs text-white/90 font-light drop-shadow">Research Collaboration</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-light tracking-tight text-white">FlexPub</h1>
-                <p className="text-xs text-white/70 font-light">Research Collaboration</p>
+              <div className="flex items-center gap-3">
+                <a
+                  href="mailto:hello.flexpub@gmail.com"
+                  className="px-4 py-2 text-white/90 hover:text-white rounded-lg font-light text-sm transition-all hover:bg-white/10 backdrop-blur-sm"
+                >
+                  Contact
+                </a>
+                <a
+                  href="mailto:hello.flexpub@gmail.com?subject=Interested in Working at FlexPub&body=Hi! I'm interested in working at FlexPub.%0D%0A%0D%0AWhat I'd like to work on:%0D%0A%0D%0APlease find my resume attached."
+                  className="px-5 py-2 rounded-lg font-medium text-sm transition-all text-gray-900 shadow-lg hover:shadow-xl backdrop-blur-sm"
+                  style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}
+                >
+                  We're Hiring
+                </a>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <a
-                href="mailto:hello.flexpub@gmail.com"
-                className="px-4 py-2 text-white/90 hover:text-white rounded-lg font-light text-sm transition-all hover:bg-white/10"
-              >
-                Contact
-              </a>
-              <a
-                href="mailto:hello.flexpub@gmail.com?subject=Interested in Working at FlexPub&body=Hi! I'm interested in working at FlexPub.%0D%0A%0D%0AWhat I'd like to work on:%0D%0A%0D%0APlease find my resume attached."
-                className="px-5 py-2 rounded-lg font-medium text-sm transition-all text-gray-900 shadow-sm hover:shadow-md"
-                style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}
-              >
-                We're Hiring
-              </a>
+          </div>
+
+          {/* Main hero text - centered */}
+          <div className="flex-1 flex items-center justify-center">
+            <h2 className="text-7xl font-light tracking-tight text-white drop-shadow-2xl">
+              Connect. Collaborate. Publish.
+            </h2>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="pb-12 flex justify-center">
+            <div className="animate-bounce">
+              <div className="w-8 h-12 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+                <div className="w-1.5 h-3 bg-white/70 rounded-full"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Hero Value Prop Section - Elegant and spacious */}
-      <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-light tracking-tight text-gray-900 mb-4">
-            Connect. Collaborate. Publish.
-          </h2>
-          <p className="text-lg text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
+        {/* Subtitle appears as hero fades */}
+        <div 
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ opacity: subtitleOpacity }}
+        >
+          <p className="text-2xl font-light text-white drop-shadow-2xl max-w-4xl text-center px-6 leading-relaxed">
             Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
           </p>
         </div>
+      </div>
 
+      {/* Two-column value prop - after landing */}
+      <div className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Side 1: Need Help */}
+          {/* Side 1: Support */}
           <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-light text-gray-900">Need Support to Complete Your Research Project?</h3>
+              <h3 className="text-2xl font-light text-gray-900">Support for Your Research Project</h3>
             </div>
             <p className="text-gray-600 mb-6 font-light leading-relaxed">
               Finding collaborators with the right skills and availability is difficult and time-consuming.
@@ -214,13 +270,13 @@ const ResearchMatchPlatform = () => {
             </div>
           </div>
 
-          {/* Side 2: Need Opportunities */}
+          {/* Side 2: Opportunities */}
           <div className="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}>
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-light text-gray-900">Looking for Research Opportunities?</h3>
+              <h3 className="text-2xl font-light text-gray-900">Research Opportunities</h3>
             </div>
             <p className="text-gray-600 mb-6 font-light leading-relaxed">
               Research opportunities are hard to find, often unpaid, and rarely transparent.
