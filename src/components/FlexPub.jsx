@@ -169,10 +169,10 @@ const ResearchMatchPlatform = () => {
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-gray-200 rounded-xl p-6 mb-6">
           <div className="max-w-3xl mx-auto text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Connect. Collaborate. Publish.
+              Get productive.
             </h2>
             <p className="text-base text-gray-700">
-              Connecting researchers who need help with their projects to those seeking experience, authorship, or compensation.
+              Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
             </p>
           </div>
 
@@ -186,7 +186,7 @@ const ResearchMatchPlatform = () => {
                 <h3 className="text-lg font-bold text-gray-900">Have a Project?</h3>
               </div>
               <p className="text-sm text-gray-700 mb-3">
-                Finding collaborators with the right skills and availability is nearly impossible.
+                Finding collaborators with the right skills and availability is difficult and time-consuming.
               </p>
               <div className="space-y-2 text-sm">
                 <div className="flex items-start gap-2 text-gray-600">
@@ -210,7 +210,7 @@ const ResearchMatchPlatform = () => {
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{backgroundColor: '#f6ae2d'}}>
                   <BookOpen className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Need Opportunities?</h3>
+                <h3 className="text-lg font-bold text-gray-900">Looking for Research Opportunities?</h3>
               </div>
               <p className="text-sm text-gray-700 mb-3">
                 Research opportunities are hard to find, often unpaid, and rarely transparent.
