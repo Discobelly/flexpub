@@ -142,165 +142,165 @@ const ResearchMatchPlatform = () => {
   const filteredProfiles = getFilteredProfiles();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      {/* Header */}
-      <div className="shadow-sm border-b border-gray-200" style={{backgroundColor: '#456b7a'}}>
-        <div className="max-w-7xl mx-auto px-4 py-4">
+    <div className="min-h-screen bg-white">
+      {/* Header - Elegant minimal design */}
+      <div className="border-b border-gray-100" style={{background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 100%)'}}>
+        <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg shadow-lg" style={{backgroundColor: '#f6ae2d'}}>
-                <BookOpen className="w-8 h-8 text-white" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}>
+                <BookOpen className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">FlexPub</h1>
-                <p className="text-sm text-white/80">Find Your Co-Author</p>
+                <h1 className="text-2xl font-light tracking-tight text-white">FlexPub</h1>
+                <p className="text-xs text-white/70 font-light">Research Collaboration</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <a
                 href="mailto:hello.flexpub@gmail.com"
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium text-sm transition-colors border border-white/20"
+                className="px-4 py-2 text-white/90 hover:text-white rounded-lg font-light text-sm transition-all hover:bg-white/10"
               >
                 Contact
               </a>
               <a
                 href="mailto:hello.flexpub@gmail.com?subject=Interested in Working at FlexPub&body=Hi! I'm interested in working at FlexPub.%0D%0A%0D%0AWhat I'd like to work on:%0D%0A%0D%0APlease find my resume attached."
-                className="px-4 py-2 text-white rounded-lg font-bold text-sm transition-opacity shadow-md hover:opacity-90"
-                style={{backgroundColor: '#f6ae2d'}}
+                className="px-5 py-2 rounded-lg font-medium text-sm transition-all text-gray-900 shadow-sm hover:shadow-md"
+                style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}
               >
-                We're Hiring!
+                We're Hiring
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Hero Value Prop Section - Clear and sleek */}
-      <div className="max-w-7xl mx-auto px-4 pt-6 pb-4">
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-gray-200 rounded-xl p-6 mb-6">
-          <div className="max-w-3xl mx-auto text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Connect. Collaborate. Publish.
-            </h2>
-            <p className="text-base text-gray-700">
-              Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
-            </p>
-          </div>
+      {/* Hero Value Prop Section - Elegant and spacious */}
+      <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-light tracking-tight text-gray-900 mb-4">
+            Connect. Collaborate. Publish.
+          </h2>
+          <p className="text-lg text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
+            Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {/* Side 1: Need Help */}
-            <div className="bg-white rounded-lg p-5 border border-gray-200">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{backgroundColor: '#456b7a'}}>
-                  <Users className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">Need Support to Complete Your Research Project?</h3>
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Side 1: Need Help */}
+          <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600">
+                <Users className="w-6 h-6 text-white" />
               </div>
-              <p className="text-sm text-gray-700 mb-3">
-                Finding collaborators with the right skills and availability is difficult and time-consuming.
-              </p>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>See who has the specific expertise you need</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Know their actual availability (hours/week)</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Match with people seeking what you can offer</span>
-                </div>
+              <h3 className="text-xl font-light text-gray-900">Need Support to Complete Your Research Project?</h3>
+            </div>
+            <p className="text-gray-600 mb-6 font-light leading-relaxed">
+              Finding collaborators with the right skills and availability is difficult and time-consuming.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 text-gray-700">
+                <span className="text-blue-500 mt-1">→</span>
+                <span className="font-light">See who has the specific expertise you need</span>
+              </div>
+              <div className="flex items-start gap-3 text-gray-700">
+                <span className="text-blue-500 mt-1">→</span>
+                <span className="font-light">Know their actual availability (hours/week)</span>
+              </div>
+              <div className="flex items-start gap-3 text-gray-700">
+                <span className="text-blue-500 mt-1">→</span>
+                <span className="font-light">Match with people seeking what you can offer</span>
               </div>
             </div>
+          </div>
 
-            {/* Side 2: Need Opportunities */}
-            <div className="bg-white rounded-lg p-5 border border-gray-200">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{backgroundColor: '#f6ae2d'}}>
-                  <BookOpen className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">Looking for Research Opportunities?</h3>
+          {/* Side 2: Need Opportunities */}
+          <div className="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}>
+                <BookOpen className="w-6 h-6 text-white" />
               </div>
-              <p className="text-sm text-gray-700 mb-3">
-                Research opportunities are hard to find, often unpaid, and rarely transparent.
-              </p>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>See payment and authorship terms upfront</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Know exact time commitment before you commit</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Filter by what matters most to you</span>
-                </div>
+              <h3 className="text-xl font-light text-gray-900">Looking for Research Opportunities?</h3>
+            </div>
+            <p className="text-gray-600 mb-6 font-light leading-relaxed">
+              Research opportunities are hard to find, often unpaid, and rarely transparent.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 text-gray-700">
+                <span className="text-amber-500 mt-1">→</span>
+                <span className="font-light">See payment and authorship terms upfront</span>
+              </div>
+              <div className="flex items-start gap-3 text-gray-700">
+                <span className="text-amber-500 mt-1">→</span>
+                <span className="font-light">Know exact time commitment before you commit</span>
+              </div>
+              <div className="flex items-start gap-3 text-gray-700">
+                <span className="text-amber-500 mt-1">→</span>
+                <span className="font-light">Filter by what matters most to you</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Bulletin Board Demo Section - MOVED HERE */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-          <div className="flex items-center justify-between mb-4 gap-4">
-            <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5" style={{color: '#456b7a'}} />
-              <h2 className="text-lg font-semibold text-gray-900">Research Bulletin Board</h2>
+      <div className="max-w-6xl mx-auto px-6 pb-12">
+        {/* Bulletin Board - Elegant card design */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-8 mb-16 shadow-sm">
+          <div className="flex items-center justify-between mb-6 gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                <BookOpen className="w-5 h-5 text-white" />
+              </div>
+              <h2 className="text-2xl font-light text-gray-900">Research Bulletin Board</h2>
             </div>
             
             <div className="flex items-center gap-3 flex-1 max-w-md">
               <div className="relative flex-1">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search projects..."
-                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
                 />
               </div>
               <button 
                 onClick={() => setShowWaitlistModal(true)}
-                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap" 
-                style={{backgroundColor: '#f6ae2d'}}
+                className="px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-sm hover:shadow-md text-gray-900 whitespace-nowrap"
+                style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}
               >
-                + Post Request
+                Post Request
               </button>
             </div>
           </div>
 
-          {/* Filter Pills - Clickable transparency filters */}
-          <div className="flex flex-wrap gap-2 mb-4 pb-4 border-b border-gray-200">
+          {/* Filter Pills - Refined design */}
+          <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b border-gray-100">
             <button 
               onClick={() => setBulletinFilters({...bulletinFilters, type: 'all'})}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
                 bulletinFilters.type === 'all' 
-                  ? 'bg-gray-800 text-white' 
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                  ? 'bg-gray-900 text-white shadow-sm' 
+                  : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
               }`}
             >
               All Projects
             </button>
             <button 
               onClick={() => setBulletinFilters({...bulletinFilters, type: bulletinFilters.type === 'paid' ? 'all' : 'paid'})}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
+              className={`px-4 py-2 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
                 bulletinFilters.type === 'paid' 
-                  ? 'bg-green-600 text-white' 
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                  ? 'bg-green-500 text-white shadow-sm' 
+                  : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
               }`}
             >
               <span>💰</span> Paid Only
             </button>
             <button 
               onClick={() => setBulletinFilters({...bulletinFilters, type: bulletinFilters.type === 'authorship' ? 'all' : 'authorship'})}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors flex items-center gap-1 ${
+              className={`px-4 py-2 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
                 bulletinFilters.type === 'authorship' 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                  ? 'bg-blue-500 text-white shadow-sm' 
+                  : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
               }`}
             >
               <span>✍️</span> Authorship
@@ -309,7 +309,7 @@ const ResearchMatchPlatform = () => {
             <select
               value={bulletinFilters.specialty}
               onChange={(e) => setBulletinFilters({...bulletinFilters, specialty: e.target.value})}
-              className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors border-none cursor-pointer"
+              className="px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-full text-xs font-medium text-gray-700 transition-all border-none cursor-pointer"
             >
               <option value="">🔬 All Specialties</option>
               <option value="cardiology">Cardiology</option>
@@ -322,7 +322,7 @@ const ResearchMatchPlatform = () => {
             <select
               value={bulletinFilters.skillset}
               onChange={(e) => setBulletinFilters({...bulletinFilters, skillset: e.target.value})}
-              className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors border-none cursor-pointer"
+              className="px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-full text-xs font-medium text-gray-700 transition-all border-none cursor-pointer"
             >
               <option value="">🛠️ All Skills</option>
               <option value="statistics">Statistics / Biostatistics</option>
@@ -335,7 +335,7 @@ const ResearchMatchPlatform = () => {
             <select
               value={bulletinFilters.timeframe}
               onChange={(e) => setBulletinFilters({...bulletinFilters, timeframe: e.target.value})}
-              className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition-colors border-none cursor-pointer"
+              className="px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-full text-xs font-medium text-gray-700 transition-all border-none cursor-pointer"
             >
               <option value="">⏱️ Any Timeframe</option>
               <option value="short">&lt;1 month</option>
@@ -345,129 +345,128 @@ const ResearchMatchPlatform = () => {
             </select>
           </div>
           
-          <div className="space-y-3">
-            {/* Demo Post 1 - With transparent badges */}
-            <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+          <div className="space-y-4">
+            {/* Demo Post 1 - Elegant card */}
+            <div className="border border-gray-100 rounded-xl p-6 hover:shadow-md transition-all bg-gradient-to-br from-white to-gray-50">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-sm font-medium bg-gradient-to-br from-blue-500 to-blue-600">
                     JK
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Looking for biostatistics expert</p>
-                    <p className="text-xs text-gray-500">MS4 • Cardiology • 2h ago</p>
+                    <p className="font-medium text-gray-900 text-base mb-1">Looking for biostatistics expert</p>
+                    <p className="text-xs text-gray-500 font-light">MS4 • Cardiology • 2h ago</p>
                   </div>
                 </div>
               </div>
 
-              {/* Transparent badges */}
-              <div className="flex flex-wrap gap-2 mb-3 ml-13">
-                <span className="px-2 py-1 bg-green-50 border border-green-200 text-green-700 text-xs font-medium rounded-md flex items-center gap-1">
+              {/* Transparent badges - refined */}
+              <div className="flex flex-wrap gap-2 mb-4 ml-16">
+                <span className="px-3 py-1.5 bg-green-50 border border-green-200 text-green-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>💰</span> $30/hr
                 </span>
-                <span className="px-2 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-medium rounded-md flex items-center gap-1">
+                <span className="px-3 py-1.5 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>✍️</span> Middle author
                 </span>
-                <span className="px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium rounded-md flex items-center gap-1">
+                <span className="px-3 py-1.5 bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>🔬</span> Cardiology
                 </span>
-                <span className="px-2 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-md flex items-center gap-1">
+                <span className="px-3 py-1.5 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>⏱️</span> 10 hrs/wk, 3 mo
                 </span>
               </div>
 
-              <p className="text-sm text-gray-700 ml-13">
+              <p className="text-sm text-gray-700 ml-16 font-light leading-relaxed">
                 Need help with power analysis and regression modeling for heart failure outcomes study. R programming required.
               </p>
             </div>
 
-            {/* Demo Post 2 - Different compensation model */}
-            <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+            {/* Demo Post 2 */}
+            <div className="border border-gray-100 rounded-xl p-6 hover:shadow-md transition-all bg-gradient-to-br from-white to-gray-50">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-sm font-medium" style={{background: 'linear-gradient(135deg, #f6ae2d 0%, #f9c74f 100%)'}}>
                     SC
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Systematic review - need literature screener</p>
-                    <p className="text-xs text-gray-500">Resident • Oncology • 5h ago</p>
+                    <p className="font-medium text-gray-900 text-base mb-1">Systematic review - need literature screener</p>
+                    <p className="text-xs text-gray-500 font-light">Resident • Oncology • 5h ago</p>
                   </div>
                 </div>
               </div>
 
               {/* Transparent badges */}
-              <div className="flex flex-wrap gap-2 mb-3 ml-13">
-                <span className="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-700 text-xs font-medium rounded-md flex items-center gap-1">
+              <div className="flex flex-wrap gap-2 mb-4 ml-16">
+                <span className="px-3 py-1.5 bg-gray-50 border border-gray-300 text-gray-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>🎓</span> Unpaid
                 </span>
-                <span className="px-2 py-1 bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-medium rounded-md flex items-center gap-1">
+                <span className="px-3 py-1.5 bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>⭐</span> First author
                 </span>
-                <span className="px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium rounded-md flex items-center gap-1">
+                <span className="px-3 py-1.5 bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>🔬</span> Oncology
                 </span>
-                <span className="px-2 py-1 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-md flex items-center gap-1">
+                <span className="px-3 py-1.5 bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium rounded-full flex items-center gap-1.5">
                   <span>⏱️</span> 5-8 hrs/wk, 4 mo
                 </span>
               </div>
 
-              <p className="text-sm text-gray-700 ml-13">
+              <p className="text-sm text-gray-700 ml-16 font-light leading-relaxed">
                 Great opportunity for first publication. Training provided on systematic review methodology. No prior experience needed.
               </p>
             </div>
           </div>
 
-          {/* Info note about transparency */}
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <p className="text-xs text-gray-600 text-center">
-              Every project shows <span className="font-semibold" style={{color: '#456b7a'}}>payment, authorship, specialty & timeframe</span> upfront. No surprises.
+          {/* Info note - refined */}
+          <div className="mt-6 pt-6 border-t border-gray-100">
+            <p className="text-xs text-gray-500 text-center font-light">
+              Every project shows <span className="font-medium text-gray-700">payment, authorship, specialty & timeframe</span> upfront. No surprises.
             </p>
           </div>
         </div>
 
-        {/* Heading for profile search section */}
-        <div className="mb-4">
-          <div className="flex items-center justify-between gap-4 mb-3">
+        {/* Heading for profile search section - Elegant */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between gap-4 mb-6">
             <div>
-              <h2 className="text-xl font-bold text-gray-900 mb-1">
+              <h2 className="text-2xl font-light text-gray-900 mb-2">
                 Don't have a project but looking for a collaborator or mentor?
               </h2>
-              <p className="text-base text-gray-600">
+              <p className="text-base text-gray-600 font-light">
                 Search and request a match. Or create a research group.
               </p>
             </div>
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Search className="w-4 h-4 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search researchers..."
-                  className="w-64 pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-64 pl-11 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
                 />
               </div>
               <button 
                 onClick={() => setShowWaitlistModal(true)}
-                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap" 
-                style={{backgroundColor: '#456b7a'}}
+                className="px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-sm hover:shadow-md text-white whitespace-nowrap bg-gradient-to-br from-blue-500 to-blue-600"
               >
-                + Create Group
+                Create Group
               </button>
             </div>
           </div>
         </div>
 
-        {/* Filter Bar */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+        {/* Filter Bar - Refined */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-8 shadow-sm">
           <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-700">
               <Filter className="w-4 h-4" />
-              <span className="text-sm font-semibold">Filters:</span>
+              <span className="text-sm font-medium">Filters:</span>
             </div>
 
             <select
               value={filters.level}
               onChange={(e) => setFilters({...filters, level: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
             >
               <option value="">All Levels</option>
               {levels.map(level => <option key={level} value={level}>{level}</option>)}
@@ -476,7 +475,7 @@ const ResearchMatchPlatform = () => {
             <select
               value={filters.specialty}
               onChange={(e) => setFilters({...filters, specialty: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
             >
               <option value="">All Specialties</option>
               {specialties.map(spec => <option key={spec} value={spec}>{spec}</option>)}
@@ -485,7 +484,7 @@ const ResearchMatchPlatform = () => {
             <select
               value={filters.institutionTier}
               onChange={(e) => setFilters({...filters, institutionTier: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
             >
               <option value="">All Tiers</option>
               {institutionTiers.map(tier => <option key={tier} value={tier}>{tier}</option>)}
@@ -494,20 +493,20 @@ const ResearchMatchPlatform = () => {
             <select
               value={filters.region}
               onChange={(e) => setFilters({...filters, region: e.target.value})}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
             >
               <option value="">All Regions</option>
               {regions.map(region => <option key={region} value={region}>{region}</option>)}
             </select>
 
-            <label className="flex items-center gap-2 cursor-pointer px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+            <label className="flex items-center gap-2 cursor-pointer px-4 py-2 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all">
               <input
                 type="checkbox"
                 checked={filters.hasPublications}
                 onChange={(e) => setFilters({...filters, hasPublications: e.target.checked})}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-sm font-medium text-gray-700">Has Publications</span>
+              <span className="text-sm font-light text-gray-700">Has Publications</span>
             </label>
 
             {(filters.level || filters.specialty || filters.institutionTier || filters.region || filters.hasPublications) && (
