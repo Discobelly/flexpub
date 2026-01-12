@@ -235,18 +235,29 @@ const ResearchMatchPlatform = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Bulletin Board Demo Section - MOVED HERE */}
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 gap-4">
             <div className="flex items-center gap-2">
               <BookOpen className="w-5 h-5" style={{color: '#456b7a'}} />
               <h2 className="text-lg font-semibold text-gray-900">Research Bulletin Board</h2>
             </div>
-            <button 
-              onClick={() => setShowWaitlistModal(true)}
-              className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity" 
-              style={{backgroundColor: '#f6ae2d'}}
-            >
-              + Post Request
-            </button>
+            
+            <div className="flex items-center gap-3 flex-1 max-w-md">
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <button 
+                onClick={() => setShowWaitlistModal(true)}
+                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap" 
+                style={{backgroundColor: '#f6ae2d'}}
+              >
+                + Post Request
+              </button>
+            </div>
           </div>
 
           {/* Filter Pills - Clickable transparency filters */}
@@ -403,12 +414,33 @@ const ResearchMatchPlatform = () => {
 
         {/* Heading for profile search section */}
         <div className="mb-4">
-          <h2 className="text-xl font-bold text-gray-900 mb-1">
-            Don't have a project but looking for a collaborator or mentor?
-          </h2>
-          <p className="text-base text-gray-600">
-            Search and request a match.
-          </p>
+          <div className="flex items-center justify-between gap-4 mb-3">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900 mb-1">
+                Don't have a project but looking for a collaborator or mentor?
+              </h2>
+              <p className="text-base text-gray-600">
+                Search and request a match. Or create a research group.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search researchers..."
+                  className="w-64 pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <button 
+                onClick={() => setShowWaitlistModal(true)}
+                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap" 
+                style={{backgroundColor: '#456b7a'}}
+              >
+                + Create Group
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Filter Bar */}
