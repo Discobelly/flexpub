@@ -157,14 +157,6 @@ const ResearchMatchPlatform = () => {
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <div className="text-right">
-                <p className="text-sm text-white/80">Match Requests</p>
-                <p className="text-2xl font-bold" style={{color: '#f6ae2d'}}>
-                  {FREE_MATCHES_PER_MONTH - freeMatchesUsed}
-                  <span className="text-sm text-white/60 ml-1">remaining</span>
-                </p>
-                <p className="text-xs text-white/60">Resets monthly</p>
-              </div>
             </div>
           </div>
         </div>
@@ -407,6 +399,16 @@ const ResearchMatchPlatform = () => {
               Every project shows <span className="font-semibold" style={{color: '#456b7a'}}>payment, authorship, specialty & timeframe</span> upfront. No surprises.
             </p>
           </div>
+        </div>
+
+        {/* Heading for profile search section */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold text-gray-900 mb-1">
+            Don't have a project but looking for a collaborator or mentor?
+          </h2>
+          <p className="text-base text-gray-600">
+            Search and request a match.
+          </p>
         </div>
 
         {/* Filter Bar */}
@@ -1003,12 +1005,6 @@ const ResearchMatchPlatform = () => {
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">3</div>
                   <p><strong>Connect and collaborate</strong> – when both parties accept, full contact details are revealed and you can start working together</p>
                 </div>
-              </div>
-              
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <p className="text-sm text-gray-700">
-                  <strong>Simple pricing:</strong> Free to browse and match. Researchers can pay to feature their project listings for more visibility.
-                </p>
               </div>
             </div>
           </div>
