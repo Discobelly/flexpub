@@ -164,6 +164,123 @@ const ResearchMatchPlatform = () => {
         </div>
       </div>
 
+      {/* Hero Value Prop Section - Make it crystal clear what this is */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-2xl p-8 mb-8">
+          <div className="max-w-4xl mx-auto text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Research Collaboration, Finally Transparent
+            </h2>
+            <p className="text-lg text-gray-700 mb-6">
+              The two-sided marketplace connecting people who need research done with people who want experience, publications, or payment.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {/* Side 1: Need Help */}
+            <div className="bg-white rounded-xl p-6 border-2 border-blue-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{backgroundColor: '#456b7a'}}>
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Have a Project?</h3>
+              </div>
+              <p className="text-gray-700 mb-4 font-medium">
+                You need help but finding the right person is impossible:
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold mt-0.5">✗</span>
+                  <span>Need someone with specific skills (statistics, writing, data collection)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold mt-0.5">✗</span>
+                  <span>Need someone with actual bandwidth (not "I'll try to fit it in")</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold mt-0.5">✗</span>
+                  <span>Need to know what motivates them (authorship? payment? experience?)</span>
+                </li>
+              </ul>
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <p className="text-sm font-semibold text-gray-900 mb-2">On FlexPub:</p>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>See exact skills, experience level, and available hours/week</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>Know upfront what they want (authorship, payment, or experience)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>Post your project with clear terms - get qualified matches</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Side 2: Need Opportunities */}
+            <div className="bg-white rounded-xl p-6 border-2 border-green-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{backgroundColor: '#f6ae2d'}}>
+                  <BookOpen className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Need Experience?</h3>
+              </div>
+              <p className="text-gray-700 mb-4 font-medium">
+                You want research opportunities but finding them is hard:
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold mt-0.5">✗</span>
+                  <span>Opportunities are hidden or informal (random emails, Twitter DMs)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold mt-0.5">✗</span>
+                  <span>Often unpaid with no authorship guarantee</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-500 font-bold mt-0.5">✗</span>
+                  <span>Unclear time commitment or what you'll actually do</span>
+                </li>
+              </ul>
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <p className="text-sm font-semibold text-gray-900 mb-2">On FlexPub:</p>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>Every project shows payment, authorship, time commitment upfront</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>Filter by what matters to you (paid only, guaranteed authorship, etc.)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 font-bold mt-0.5">✓</span>
+                    <span>No surprises - know exactly what you're signing up for</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <button
+              onClick={() => setShowWaitlistModal(true)}
+              className="px-8 py-4 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:opacity-90 transition-all"
+              style={{backgroundColor: '#456b7a'}}
+            >
+              Join the Waitlist →
+            </button>
+            <p className="text-sm text-gray-600 mt-3">
+              Like Fiverr for research. 7 free match requests/month. No surprises.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Filter Bar */}
         <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
@@ -838,23 +955,6 @@ const ResearchMatchPlatform = () => {
 
       {/* Info Banners */}
       <div className="max-w-7xl mx-auto px-4 py-6 space-y-4">
-        {/* Mission Statement */}
-        <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 border-2 border-yellow-200 rounded-xl p-6">
-          <div className="flex items-start gap-4">
-            <div className="bg-blue-600 p-2 rounded-lg">
-              <Heart className="w-6 h-6 text-gray-900 font-bold" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-yellow-900 mb-2">Built for Researchers, By Researchers</h3>
-              <p className="text-sm text-yellow-800">
-                We know finding research opportunities is hard – often unpaid, rarely offering authorship, and unclear from the start. 
-                FlexPub changes this. Every opportunity shows <strong>payment, authorship, time commitment, and required skills upfront</strong>. 
-                No surprises. No wasted time. Just transparent collaboration.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Privacy Info */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
           <div className="flex items-start gap-4">
