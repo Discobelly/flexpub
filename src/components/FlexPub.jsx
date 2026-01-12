@@ -156,7 +156,20 @@ const ResearchMatchPlatform = () => {
                 <p className="text-sm text-white/80">Find Your Co-Author</p>
               </div>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <a
+                href="mailto:hello.flexpub@gmail.com"
+                className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium text-sm transition-colors border border-white/20"
+              >
+                Contact
+              </a>
+              <a
+                href="mailto:hello.flexpub@gmail.com?subject=Interested in Working at FlexPub&body=Hi! I'm interested in working at FlexPub.%0D%0A%0D%0AWhat I'd like to work on:%0D%0A%0D%0APlease find my resume attached."
+                className="px-4 py-2 text-white rounded-lg font-bold text-sm transition-opacity shadow-md hover:opacity-90"
+                style={{backgroundColor: '#f6ae2d'}}
+              >
+                We're Hiring!
+              </a>
             </div>
           </div>
         </div>
@@ -1031,7 +1044,7 @@ const ResearchMatchPlatform = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">2</div>
-                  <p><strong>Send match requests</strong> – you get <strong>7 free match requests per month</strong> to connect with the right collaborators</p>
+                  <p><strong>Send match requests</strong> – you get <strong>7 match requests per month</strong> with opportunity to opt for more</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">3</div>
