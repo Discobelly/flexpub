@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Users, BookOpen, GraduationCap, Award, DollarSign, Filter, X, Lock, CheckCircle, Crown, Zap, Heart } from 'lucide-react';
 import { demoProfiles } from '../data/demoProfiles';
+import acropolisImage from './Muller_Rudolph_-_View_of_the_Acropolis_from_the_Pnyx_-_Google_Art_Project.jpg';
 
 const ResearchMatchPlatform = () => {
   const [selectedProfile, setSelectedProfile] = useState(null);
@@ -17,6 +18,14 @@ const ResearchMatchPlatform = () => {
   const [freeMatchesUsed, setFreeMatchesUsed] = useState(0);
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   const [hasSeenModal, setHasSeenModal] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Scroll listener for landing page animations
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const [bulletinFilters, setBulletinFilters] = useState({
     type: 'all', // all, paid, authorship
     specialty: '',
@@ -24,41 +33,7 @@ const ResearchMatchPlatform = () => {
     skillset: ''
   });
 
-  // Trigger modal when user scrolls, regardless of filtered results
-  useEffect(() => {
-    const handleScroll = () => {
-      if (hasSeenModal) return;
-      
-      const scrollPosition = window.scrollY;
-      
-      // Show modal after user has scrolled down 800px (past the header and some content)
-      if (scrollPosition > 800) {
-        setShowWaitlistModal(true);
-        setHasSeenModal(true);
-      }
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasSeenModal]);
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (showWaitlistModal) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-    };
-  }, [showWaitlistModal]);
 
   // Use imported demo profiles
   const profiles = demoProfiles;
@@ -141,116 +116,221 @@ const ResearchMatchPlatform = () => {
 
   const filteredProfiles = getFilteredProfiles();
 
+  // Calculate scroll-based animations
+  const heroOpacity = Math.max(0, 1 - scrollY / 600); // Stays longer - was 400
+  const heroScale = 1 + (scrollY / 2000);
+  const subtitleOpacity = Math.max(0, Math.min(1, (scrollY - 300) / 400)); // Starts earlier - was 400/300
+  
+  // Frame opacity - fades out as you scroll past 2000px
+  const frameOpacity = Math.max(0, 1 - (scrollY - 2000) / 800);
+  
+  // Calculate if we're in the "fixed frame" zone
+  const isInFrameZone = scrollY > 800;
+  const frameTransform = isInFrameZone ? 'translateY(0)' : 'translateY(-100vh)';
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      {/* Header */}
-      <div className="shadow-sm border-b border-gray-200" style={{backgroundColor: '#456b7a'}}>
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg shadow-lg" style={{backgroundColor: '#f6ae2d'}}>
-                <BookOpen className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-white">FlexPub</h1>
-                <p className="text-sm text-white/80">Find Your Co-Author</p>
-              </div>
+    <div className="min-h-screen bg-white">
+      {/* Fixed header - transitions from white to black */}
+      <div 
+        className="fixed top-6 left-6 right-6 z-[60] transition-all duration-500 px-6 py-4 rounded-2xl"
+        style={{
+          background: scrollY > 400 ? 'white' : 'transparent',
+          boxShadow: scrollY > 400 ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'
+        }}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div 
+              className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-sm transition-all duration-500" 
+              style={{
+                background: scrollY > 400 
+                  ? 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'
+                  : 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'
+              }}
+            >
+              <BookOpen className="w-5 h-5 text-white" />
             </div>
             <div className="flex items-center gap-3">
-              <a
-                href="mailto:hello.flexpub@gmail.com"
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium text-sm transition-colors border border-white/20"
+              <h1 
+                className="text-2xl font-light tracking-tight transition-colors duration-500"
+                style={{ color: scrollY > 400 ? '#1a1a1a' : 'white' }}
               >
-                Contact
-              </a>
-              <a
-                href="mailto:hello.flexpub@gmail.com?subject=Interested in Working at FlexPub&body=Hi! I'm interested in working at FlexPub.%0D%0A%0D%0AWhat I'd like to work on:%0D%0A%0D%0APlease find my resume attached."
-                className="px-4 py-2 text-white rounded-lg font-bold text-sm transition-opacity shadow-md hover:opacity-90"
-                style={{backgroundColor: '#f6ae2d'}}
+                FlexPub
+              </h1>
+              <span 
+                className="text-sm font-light transition-colors duration-500 hidden sm:block"
+                style={{ color: scrollY > 400 ? 'rgba(26, 26, 26, 0.6)' : 'rgba(255, 255, 255, 0.7)' }}
               >
-                We're Hiring!
-              </a>
+                Connect. Collaborate. Publish.
+              </span>
             </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="mailto:hello.flexpub@gmail.com"
+              className="px-4 py-2 rounded-lg font-light text-sm transition-all backdrop-blur-sm"
+              style={{
+                color: scrollY > 400 ? '#1a1a1a' : 'rgba(255, 255, 255, 0.9)',
+                background: scrollY > 400 ? 'transparent' : 'rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              Contact
+            </a>
+            <button
+              onClick={() => setShowWaitlistModal(true)}
+              className="px-4 py-2 rounded-lg font-medium text-sm transition-all shadow-md hover:opacity-90"
+              style={{
+                background: scrollY > 400 
+                  ? 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'
+                  : 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)',
+                color: 'white'
+              }}
+            >
+              Join FlexPub
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Hero Value Prop Section - Clear and sleek */}
-      <div className="max-w-7xl mx-auto px-4 pt-6 pb-4">
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-gray-200 rounded-xl p-6 mb-6">
-          <div className="max-w-3xl mx-auto text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Connect. Collaborate. Publish.
-            </h2>
-            <p className="text-base text-gray-700">
-              Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
-            </p>
-          </div>
+      {/* White frame - fades out on scroll */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-50 transition-opacity duration-700"
+        style={{ opacity: frameOpacity }}
+      >
+        <div className="absolute inset-0" style={{
+          border: '20px solid white',
+          boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.15)'
+        }}></div>
+      </div>
 
-          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {/* Side 1: Need Help */}
-            <div className="bg-white rounded-lg p-5 border border-gray-200">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{backgroundColor: '#456b7a'}}>
-                  <Users className="w-5 h-5 text-white" />
+      {/* Content with padding for frame */}
+      <div className="relative" style={{ padding: '20px' }}>
+      {/* Landing Hero - Full viewport with Acropolis painting */}
+      <div className="relative h-screen overflow-hidden rounded-3xl">
+        {/* Background painting with zoom effect */}
+        <div 
+          className="absolute inset-0 transition-transform duration-700 ease-out"
+          style={{
+            transform: `scale(${heroScale})`,
+            opacity: heroOpacity
+          }}
+        >
+          <img 
+            src={acropolisImage} 
+            alt="Acropolis" 
+            className="w-full h-full object-cover rounded-3xl"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40 rounded-3xl"></div>
+        </div>
+
+        {/* Hero content - fades out on scroll */}
+        <div 
+          className="relative z-10 h-full flex flex-col"
+          style={{ opacity: heroOpacity }}
+        >
+          {/* Two-column cards on landing page */}
+          <div className="flex-1 flex items-center justify-center pt-20">
+            <div className="max-w-6xl w-full px-6">
+              <div 
+                className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto transition-opacity duration-500"
+                style={{ opacity: Math.max(0, 1 - scrollY / 400) }}
+              >
+                {/* Side 1 - Golden ochre from temple */}
+                <div className="rounded-xl p-6 border shadow-lg backdrop-blur-md" style={{
+                  background: 'linear-gradient(135deg, rgba(245, 239, 232, 0.95) 0%, rgba(235, 228, 217, 0.95) 100%)',
+                  borderColor: '#d4a574'
+                }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md" style={{
+                      background: 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'
+                    }}>
+                      <Users className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">I am looking for support for my research project</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="mt-0.5" style={{color: '#c9995e'}}>→</span>
+                      <span>See who has the specific expertise you need</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="mt-0.5" style={{color: '#c9995e'}}>→</span>
+                      <span>Know their actual availability (hours/week)</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="mt-0.5" style={{color: '#c9995e'}}>→</span>
+                      <span>Match with people seeking what you can offer</span>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Need Support to Complete Your Research Project?</h3>
-              </div>
-              <p className="text-sm text-gray-700 mb-3">
-                Finding collaborators with the right skills and availability is difficult and time-consuming.
-              </p>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>See who has the specific expertise you need</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Know their actual availability (hours/week)</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Match with people seeking what you can offer</span>
+
+                {/* Side 2 - Rose-purple from sky */}
+                <div className="rounded-xl p-6 border shadow-lg backdrop-blur-md" style={{
+                  background: 'linear-gradient(135deg, rgba(243, 238, 242, 0.95) 0%, rgba(232, 223, 230, 0.95) 100%)',
+                  borderColor: '#b8969e'
+                }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md" style={{
+                      background: 'linear-gradient(135deg, #b8969e 0%, #a68793 100%)'
+                    }}>
+                      <BookOpen className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">I am looking to contribute to research projects</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="mt-0.5" style={{color: '#a68793'}}>→</span>
+                      <span>See payment and authorship terms upfront</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="mt-0.5" style={{color: '#a68793'}}>→</span>
+                      <span>Know exact time commitment before you commit</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <span className="mt-0.5" style={{color: '#a68793'}}>→</span>
+                      <span>Filter by what matters most to you</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Side 2: Need Opportunities */}
-            <div className="bg-white rounded-lg p-5 border border-gray-200">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{backgroundColor: '#f6ae2d'}}>
-                  <BookOpen className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">Looking for Research Opportunities?</h3>
-              </div>
-              <p className="text-sm text-gray-700 mb-3">
-                Research opportunities are hard to find, often unpaid, and rarely transparent.
-              </p>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>See payment and authorship terms upfront</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Know exact time commitment before you commit</span>
-                </div>
-                <div className="flex items-start gap-2 text-gray-600">
-                  <span className="text-gray-400 mt-0.5">→</span>
-                  <span>Filter by what matters most to you</span>
-                </div>
+          {/* Scroll indicator */}
+          <div className="pb-12 flex justify-center">
+            <div className="animate-bounce">
+              <div className="w-8 h-12 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+                <div className="w-1.5 h-3 bg-white/70 rounded-full"></div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Subtitle scrolls UP into frame */}
+        <div 
+          className="absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-700"
+          style={{ 
+            opacity: subtitleOpacity,
+            transform: `translateY(${Math.max(0, 80 - (scrollY - 300) / 6)}px)` // Starts sooner, moves faster
+          }}
+        >
+          <p className="text-3xl font-light text-white drop-shadow-2xl max-w-4xl text-center px-6 leading-relaxed">
+            Connecting researchers looking for support for their projects to those seeking research experience, authorship, or an opportunity to make some cash.
+          </p>
+        </div>
       </div>
 
+      {/* Content zone - bulletin board */}
+      <div className="relative z-30 bg-white rounded-3xl mt-8 border border-gray-200 shadow-xl overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Bulletin Board Demo Section - MOVED HERE */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
+        {/* Bulletin Board - Warm terracotta tones from Acropolis */}
+        <div className="rounded-xl shadow-sm p-6 mb-6 border" style={{
+          background: 'linear-gradient(135deg, #faf6f1 0%, #f5efe8 100%)',
+          borderColor: '#d4a574'
+        }}>
           <div className="flex items-center justify-between mb-4 gap-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5" style={{color: '#456b7a'}} />
+              <BookOpen className="w-5 h-5" style={{color: '#b88563'}} />
               <h2 className="text-lg font-semibold text-gray-900">Research Bulletin Board</h2>
             </div>
             
@@ -260,13 +340,17 @@ const ResearchMatchPlatform = () => {
                 <input
                   type="text"
                   placeholder="Search projects..."
-                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm focus:ring-2 transition-all"
+                  style={{
+                    borderColor: '#d4a574',
+                    '--tw-ring-color': '#c9995e'
+                  }}
                 />
               </div>
               <button 
                 onClick={() => setShowWaitlistModal(true)}
-                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap" 
-                style={{backgroundColor: '#f6ae2d'}}
+                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap"
+                style={{background: 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'}}
               >
                 + Post Request
               </button>
@@ -350,7 +434,7 @@ const ResearchMatchPlatform = () => {
             <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#1a3d2e'}}>
                     JK
                   </div>
                   <div>
@@ -385,7 +469,7 @@ const ResearchMatchPlatform = () => {
             <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#456b7a'}}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{backgroundColor: '#1a3d2e'}}>
                     SC
                   </div>
                   <div>
@@ -420,11 +504,14 @@ const ResearchMatchPlatform = () => {
           {/* Info note about transparency */}
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-xs text-gray-600 text-center">
-              Every project shows <span className="font-semibold" style={{color: '#456b7a'}}>payment, authorship, specialty & timeframe</span> upfront. No surprises.
+              Every project shows <span className="font-semibold" style={{color: '#b88563'}}>payment, authorship, specialty & timeframe</span> upfront. No surprises.
             </p>
           </div>
         </div>
+      </div>
 
+      {/* Profile section */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Heading for profile search section */}
         <div className="mb-4">
           <div className="flex items-center justify-between gap-4 mb-3">
@@ -436,22 +523,13 @@ const ResearchMatchPlatform = () => {
                 Search and request a match. Or create a research group.
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search researchers..."
-                  className="w-64 pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-              <button 
-                onClick={() => setShowWaitlistModal(true)}
-                className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-md hover:opacity-90 transition-opacity whitespace-nowrap" 
-                style={{backgroundColor: '#456b7a'}}
-              >
-                + Create Group
-              </button>
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search researchers..."
+                className="w-64 pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
           </div>
         </div>
@@ -533,7 +611,7 @@ const ResearchMatchPlatform = () => {
               <div key={profile.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg" style={{backgroundColor: '#456b7a'}}>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg" style={{backgroundColor: '#1a3d2e'}}>
                       {profile.displayName.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
@@ -625,8 +703,8 @@ const ResearchMatchPlatform = () => {
                   ) : (
                     <button
                       onClick={() => handleMatch(profile)}
-                      className="flex-1 px-4 py-2 text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-md hover:opacity-90"
-                      style={{backgroundColor: '#f6ae2d'}}
+                      className="flex-1 px-4 py-2 text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md hover:opacity-90"
+                      style={{background: 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'}}
                     >
                       {isPremium || canSendFreeMatch() ? (
                         <>
@@ -668,8 +746,8 @@ const ResearchMatchPlatform = () => {
           {/* Modal - centered and compact with max-height for small screens */}
           <div className="relative bg-white rounded-2xl w-full max-w-md shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
             
-            {/* Modal header section - Dusky Blue #456b7a - more compact */}
-            <div className="px-8 pt-8 pb-6 relative" style={{backgroundColor: '#456b7a'}}>
+            {/* Modal header section - Dusky Blue #1a3d2e - more compact */}
+            <div className="px-8 pt-8 pb-6 relative" style={{backgroundColor: '#1a3d2e'}}>
               <button
                 onClick={() => setShowWaitlistModal(false)}
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -679,7 +757,7 @@ const ResearchMatchPlatform = () => {
               </button>
               
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style={{backgroundColor: '#f6ae2d'}}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style={{background: 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'}}>
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-white">Join FlexPub</h2>
@@ -862,7 +940,7 @@ const ResearchMatchPlatform = () => {
                 <button
                   type="submit"
                   className="w-full text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:opacity-90 text-base mt-4"
-                  style={{backgroundColor: '#f6ae2d'}}
+                  style={{background: 'linear-gradient(135deg, #d4a574 0%, #c9995e 100%)'}}
                 >
                   Get Early Access →
                 </button>
@@ -1012,45 +1090,24 @@ const ResearchMatchPlatform = () => {
         </div>
       )}
 
-      {/* Info Banners */}
-      <div className="max-w-7xl mx-auto px-4 py-6 space-y-4">
-        {/* Privacy Info */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+      {/* Info Banners - Acropolis color palette */}
+      <div className="max-w-7xl mx-auto px-4 py-12 space-y-6">
+        {/* Privacy Info - Mountain purple-blue */}
+        <div className="rounded-xl p-6 border shadow-sm" style={{
+          background: 'linear-gradient(135deg, #f0eef3 0%, #e6e2eb 100%)',
+          borderColor: '#9d92b5'
+        }}>
           <div className="flex items-start gap-4">
-            <div className="bg-blue-600 p-2 rounded-lg">
-              <Lock className="w-6 h-6 text-gray-900 font-bold" />
+            <div className="p-2 rounded-lg shadow-md" style={{
+              background: 'linear-gradient(135deg, #8b7fa8 0%, #9d92b5 100%)'
+            }}>
+              <Lock className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="font-semibold text-blue-900 mb-2">Privacy First</h3>
-              <p className="text-sm text-blue-800">
-                You control how much you share. Show your full name or just initials. Share your specific university or just the tier (Top 10, Top 50, etc.). Full contact details are only revealed after you both match.
+              <h3 className="font-semibold text-gray-900 mb-2 text-lg">Privacy First</h3>
+              <p className="text-sm text-gray-700">
+                You control how much you share. Show your full name or just initials. Share your specific university or just the tier (Top 10, Top 50, etc.). Full contact details are only revealed after you both accept the match.
               </p>
-            </div>
-          </div>
-        </div>
-
-        {/* How It Works */}
-        <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
-          <div className="flex items-start gap-4">
-            <div className="bg-gray-700 p-2 rounded-lg">
-              <Users className="w-6 h-6 text-gray-900 font-bold" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-gray-900 mb-3">How Matching Works</h3>
-              <div className="space-y-3 text-sm text-gray-700">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">1</div>
-                  <p><strong>Browse transparent opportunities</strong> – see payment, authorship, time commitment, and skills needed upfront</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">2</div>
-                  <p><strong>Send match requests</strong> – you get <strong>7 match requests per month</strong> with opportunity to opt for more</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-blue-800 font-bold text-xs">3</div>
-                  <p><strong>Connect and collaborate</strong> – when both parties accept, full contact details are revealed and you can start working together</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -1064,7 +1121,7 @@ const ResearchMatchPlatform = () => {
             <a 
               href="mailto:hello.flexpub@gmail.com" 
               className="font-medium hover:underline"
-              style={{color: '#456b7a'}}
+              style={{color: '#1a3d2e'}}
             >
               hello.flexpub@gmail.com
             </a>
@@ -1073,6 +1130,8 @@ const ResearchMatchPlatform = () => {
             © 2026 FlexPub. Built for researchers, by researchers.
           </p>
         </div>
+      </div>
+      </div>
       </div>
     </div>
   );
